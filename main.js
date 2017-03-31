@@ -4,12 +4,9 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert, ScrollView } from 'rea
 import { Components } from 'exponent';
 import benchesData from './benches';
 const { MapView } = Components;
+import Geocoder from './Helpers/Geocoder';
 
-// Assuming data is JSON with Latitude and Longitude
-// We can remove these 3 next lines
-// import Geocoder from './Helpers/Geocoder';
-// const benches = Benches.items.slice(0,10);
-// const geocoder = new Geocoder();
+const geocoder = new Geocoder();
 
 class App extends Component {
 
@@ -23,36 +20,37 @@ class App extends Component {
 
   componentDidMount() {
     const { markers } = this.state;
-    const markersArr = [];
+    const smallArr = benchesData.items.slice(0, 10);
 
-    benchesData.items.map((bench) => {
+    benchesData.items.slice(0, 7).forEach((bench, index) => {
+      const address = bench.properties.Geocode_Ad;
 
-      // Looping through array of Benches
-      // For now using ADDRESS instead of LATLNG
-      // TODO: Find correct data and push LATLNG instead
-      // newArr.push(bench.properties.latlng) -- has to be an object like so: 
-      // { latitude: 40.9128, longitude: -74.0059 }
+      geocoder.getGeolocation(address)
+        .then((data) => {
 
-      markersArr.push(bench.properties.latlng);
+          const { results } = data;
+          const markersArr = [];
+
+          results.forEach((item) => {
+            const { geometry } = item;
+
+            if (geometry.location) {
+              const { location } = geometry;
+              console.log(location);
+              markersArr.push({
+                latitude: location.lat,
+                longitude: location.lng,
+              });
+            }
+          });
+
+          return markersArr;
+        })
+        .then((markersArr) => {
+          this.setState({ markers: markersArr });
+        });
     });
-
-    this.setState({ markers: markersArr });
-
   }
-
-  // Get 10 benches 
-  // loop through benches to get address and call geoLocation function on them. 
-  // format return jSON to match latlong object. 
-  // update markers array in state with new object (dont remove old ones). 
-
-  // componentDidMount() {
-    // geocoder.getGeolocation("West 113th Street & West 114th Street")
-    //   .then((data) => {
-    //     const newMarkers = [...markers]
-    //     newMarkers.push(//o formatted object)
-    //     this.setState({markers: newMarkers})
-    //   })
-  // }
 
   _getMarker = (coordinate) => (
     <MapView.Marker coordinate={coordinate} key={Math.random()} />

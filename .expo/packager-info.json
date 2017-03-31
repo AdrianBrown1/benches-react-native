@@ -1,10 +1,10 @@
 {
   "exponentServerPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 7314,
+  "packagerPid": 66747,
   "exponentServerNgrokUrl": "https://cv-2mr.adrianbrown1.nyc-benches.exp.direct",
-  "packagerNgrokUrl": "https://packager.cv-2mr.adrianbrown1.nyc-benches.exp.direct",
-  "ngrokPid": 7326,
+  "packagerNgrokUrl": "https://packager.py-247.adrianbrown1.nyc-benches.exp.direct",
+  "ngrokPid": 66788,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://cv-2mr.adrianbrown1.nyc-benches.exp.direct"
+  "expoServerNgrokUrl": "https://8r-qju.adrianbrown1.nyc-benches.exp.direct"
 }
