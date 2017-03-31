@@ -1,7 +1,5 @@
 // import { API_KEY } from '../config';
 
-import fetch from 'node-fetch';
-
 class Geocoder {   
 
   constructor() {

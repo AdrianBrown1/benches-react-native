@@ -20,36 +20,49 @@ class App extends Component {
 
   componentDidMount() {
     const { markers } = this.state;
-    const smallArr = benchesData.items.slice(0, 10);
+    const markersArr = []
+    console.log(benchesData.items);
 
-    benchesData.items.slice(0, 7).forEach((bench, index) => {
-      const address = bench.properties.Geocode_Ad;
 
-      geocoder.getGeolocation(address)
-        .then((data) => {
+    benchesData.items.forEach((bench, index) => {
+      console.log(bench.latlng);
 
-          const { results } = data;
-          const markersArr = [];
+      const latLong = bench.latlng;
+      markersArr.push(latLong);
 
-          results.forEach((item) => {
-            const { geometry } = item;
-
-            if (geometry.location) {
-              const { location } = geometry;
-              console.log(location);
-              markersArr.push({
-                latitude: location.lat,
-                longitude: location.lng,
-              });
-            }
-          });
-
-          return markersArr;
-        })
-        .then((markersArr) => {
-          this.setState({ markers: markersArr });
-        });
     });
+
+    // const smallArr = benchesData.items.slice(0, 10);
+    // benchesData.items.forEach((bench, index) => {
+
+    //   console.log(bench);
+    // 
+    //   const address = bench.properties.Geocode_Ad;
+
+    //   geocoder.getGeolocation(address)
+    //     .then((data) => {
+
+    //       const { results } = data;
+    //       const markersArr = [];
+
+    //       results.forEach((item) => {
+    //         const { geometry } = item;
+
+    //         if (geometry.location) {
+    //           const { location } = geometry;
+    //           markersArr.push({
+    //             latitude: location.lat,
+    //             longitude: location.lng,
+    //           });
+    //         }
+    //       });
+
+    //       return markersArr;
+    //     })
+    //     .then((markersArr) => {
+          this.setState({ markers: markersArr });
+    //     });
+    // });
   }
 
   _getMarker = (coordinate) => (
