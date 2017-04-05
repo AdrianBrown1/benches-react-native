@@ -5,6 +5,7 @@ import { Components } from 'exponent';
 import benchesData from './benches';
 const { MapView } = Components;
 import Geocoder from './Helpers/Geocoder';
+import MapMarker from './Components/map-marker';
 
 const geocoder = new Geocoder();
 
@@ -20,24 +21,27 @@ class App extends Component {
 
   componentDidMount() {
     const { markers } = this.state;
-    const markersArr = []
-    console.log(benchesData.items);
+    // const markersArr = []
+
+    // // navigator.geolocation.getCurrentPosition((res) => {
+    // //   console.log(res)
+    // // })
 
 
-    benchesData.items.slice(0,50).forEach((bench, index) => {
-      console.log(bench.latlng);
+    // benchesData.items.slice(0,50).forEach((bench, index) => {
 
-      const latLong = bench.latlng;
-      markersArr.push(latLong);
+    //   const latLong = bench.latlng;
+    //   markersArr.push(latLong);
 
-    });
+    // });
 
-     this.setState({ markers: markersArr });
+     this.setState({ markers: benchesData.items.slice(0,50) });
 
   }
 
-  _getMarker = (coordinate) => (
-    <MapView.Marker coordinate={coordinate} key={Math.random()} />
+  _getMarker = (bench) => (
+    // <MapView.Marker coordinate={coordinate} key={Math.random()} />
+      <MapMarker bench={bench} key={Math.random()} />
   )
 
   _routeToBenchOnMap = (bench) => {
@@ -58,6 +62,7 @@ class App extends Component {
       <View style={styles.container}>
         <MapView
           style={{flex: 1}}
+          showsUserLocation
           initialRegion={{
             latitude: 40.7128,
             longitude: -74.0059,

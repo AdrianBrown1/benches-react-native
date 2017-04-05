@@ -1,8 +1,8 @@
 {
-  "packagerPort": 19002,
-  "packagerPid": 69609,
+  "packagerPort": 19004,
+  "packagerPid": 74880,
   "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://9p-8hw.adrianbrown1.nyc-benches.exp.direct",
-  "packagerNgrokUrl": "https://packager.9p-8hw.adrianbrown1.nyc-benches.exp.direct",
-  "ngrokPid": 69622
+  "expoServerNgrokUrl": "https://wc-6pu.adrianbrown1.nyc-benches.exp.direct",
+  "packagerNgrokUrl": "https://packager.wc-6pu.adrianbrown1.nyc-benches.exp.direct",
+  "ngrokPid": 74906
 }
